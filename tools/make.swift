@@ -4,7 +4,7 @@ import CoreGraphics
 // Standalone generator for the profile banner: a space invader runs across and
 // writes MANU in dashes behind it. Pure CoreGraphics, no dependencies.
 //
-// The sprite and its colour are taken from the GitHub avatar, so the two match.
+// The sprite shape is taken from the GitHub avatar; the ink is purple.
 //
 //   swiftc -O make.swift -o make && ./make <output-dir>
 
@@ -42,33 +42,39 @@ let glyphs: [Character: [String]] = [
     "M": ["#...#", "##.##", "#.#.#", "#.#.#", "#...#", "#...#", "#...#"],
     "N": ["#...#", "##..#", "#.#.#", "#.#.#", "#..##", "#...#", "#...#"],
     "U": ["#...#", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."],
+    ".": ["..", "..", "..", "..", "..", "..", "##"],
 ]
 
-let message = "MANU"
-let glyphWidth = 5, glyphHeight = 7, letterGap = 2, spaceWidth = 3
+let message = "M.A.N.U"
+let glyphHeight = 7, letterGap = 2, tightGap = 1, spaceWidth = 3
 
-/// Column offset of each character, and the total width in columns.
+/// Column offset of each character, and the total width in columns. Glyphs carry
+/// their own width, so a dot takes two columns where a letter takes five.
 func layout() -> (offsets: [(Character, Int)], columns: Int) {
+    let characters = Array(message)
     var offsets: [(Character, Int)] = []
     var cursor = 0
-    for (index, character) in message.enumerated() {
-        if character == " " {
+    for (index, character) in characters.enumerated() {
+        guard let glyph = glyphs[character], let row = glyph.first else {
             cursor += spaceWidth + letterGap
             continue
         }
         offsets.append((character, cursor))
-        cursor += glyphWidth
-        if index < message.count - 1 { cursor += letterGap }
+        cursor += row.count
+        guard index < characters.count - 1 else { continue }
+        // Tighter either side of a dot, so M.A.N.U reads as one word.
+        let next = characters[index + 1]
+        cursor += (character == "." || next == ".") ? tightGap : letterGap
     }
     return (offsets, cursor)
 }
 
 // MARK: - Canvas
 
-let ink = CGColor(red: 1.0, green: 0x33 / 255.0, blue: 0xB3 / 255.0, alpha: 1)
-let cell: CGFloat = 22          // text cell
+let ink = CGColor(red: 0xA8 / 255.0, green: 0x55 / 255.0, blue: 0xF7 / 255.0, alpha: 1)
+let cell: CGFloat = 21          // text cell
 let invaderCell: CGFloat = 16   // sprite cell
-let size = CGSize(width: 860, height: 320)
+let size = CGSize(width: 940, height: 320)
 let fps = 24.0
 let loop = 2.6
 let frameCount = Int(loop * fps)
