@@ -4,8 +4,6 @@
 
 ### AI Engineer
 
+Co-Founder, Head R&D @ zeldaLabs&nbsp; | &nbsp;Building AI agents that think and act for themselves&nbsp; | &nbsp;MSE (AI) @ UniMelb
+
 </div>
-
----
-
-I build developer tools and applied AI systems, mostly for macOS.
