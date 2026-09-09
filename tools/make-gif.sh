@@ -19,7 +19,7 @@ echo "-> encoding gif"
 # Keyed transparent so it sits on either GitHub theme. GIF alpha is 1 bit, and
 # every pixel here is fully opaque, so nothing is lost to the threshold.
 ffmpeg -y -loglevel error -framerate 24 -i "$FRAMES/%03d.png" \
-  -vf "fps=24,scale=940:-1:flags=neighbor,split[a][b];[a]palettegen=max_colors=32:reserve_transparent=1[p];[b][p]paletteuse=dither=none:alpha_threshold=128" \
+  -vf "fps=24,scale=900:-1:flags=neighbor,split[a][b];[a]palettegen=max_colors=32:reserve_transparent=1[p];[b][p]paletteuse=dither=none:alpha_threshold=128" \
   assets/manu.gif
 
 echo "wrote assets/manu.gif ($(du -h assets/manu.gif | cut -f1))"

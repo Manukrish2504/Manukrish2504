@@ -42,7 +42,7 @@ let glyphs: [Character: [String]] = [
     "M": ["#...#", "##.##", "#.#.#", "#.#.#", "#...#", "#...#", "#...#"],
     "N": ["#...#", "##..#", "#.#.#", "#.#.#", "#..##", "#...#", "#...#"],
     "U": ["#...#", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."],
-    ".": ["..", "..", "..", "..", "..", "..", "##"],
+    ".": [".", ".", ".", ".", ".", ".", "#"],
 ]
 
 let message = "M.A.N.U"
@@ -74,7 +74,7 @@ func layout() -> (offsets: [(Character, Int)], columns: Int) {
 let ink = CGColor(red: 0xA8 / 255.0, green: 0x55 / 255.0, blue: 0xF7 / 255.0, alpha: 1)
 let cell: CGFloat = 21          // text cell
 let invaderCell: CGFloat = 16   // sprite cell
-let size = CGSize(width: 940, height: 320)
+let size = CGSize(width: 900, height: 320)
 let fps = 24.0
 let loop = 2.6
 let frameCount = Int(loop * fps)
