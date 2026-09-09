@@ -2,11 +2,13 @@
 
 <img src="assets/manu.gif" width="760" alt="MANU">
 
+### AI Engineer
+
 </div>
 
 ---
 
-Software engineer. I mostly build developer tools for macOS.
+I build developer tools and applied AI systems, mostly for macOS.
 
 ### What I am working on
 
